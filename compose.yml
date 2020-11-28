@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+
+  db:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  icecast:
+    image: seldszar/icecast:latest
+    ports:
+      - "8000:8888"# this port should be removed on production enviroment
+    networks:
+      - backend
+
+networks:
+  dev:
+
+volumes:
+  db-data:

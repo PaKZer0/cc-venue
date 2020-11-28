@@ -1,0 +1,69 @@
+version: "3.8"
+services:
+  icecast:
+    image: moul/icecast:latest
+    env_file:
+      - project.env
+    ports:
+      - "8000:8000"# this port should be removed on production enviroment
+    networks:
+      - dev
+  
+  # add https://hub.docker.com/_/eggdrop/ bot?
+  irc:
+    image: inspircd/inspircd-docker:latest
+    env_file:
+      - project.env
+    ports:
+      - "6667:6667"
+      - "6697:6697"
+      - "7000:7000"
+      - "7001:7001"
+    networks:
+      - dev
+  db:
+    #container_name: cc_venue_db_1
+    image: postgres:latest
+    restart: always
+    env_file:
+      - project.env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - dev
+  
+  vakten:
+    build: vakten/vaktpj/
+    command: >
+      gunicorn vaktapp.wsgi:application --bind 0.0.0.0:8080 --workers=4
+    env_file:
+      - project.env
+    ports:
+      - 8080:8080
+    networks:
+      - dev
+    depends_on:
+      - db
+    volumes:
+      - staticfiles:/code/staticfiles
+  
+  nginx:
+    #container_name: cc_venue_nginx_1
+    image: nginx:mainline-alpine
+    restart: always
+    ports:
+      - 1337:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - staticfiles:/opt/staticfiles
+    networks:
+      - dev
+    depends_on:
+      - vakten
+
+networks:
+  dev:
+
+volumes:
+  db-data:
+  staticfiles:
