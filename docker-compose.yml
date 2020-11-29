@@ -34,8 +34,6 @@ services:
   
   vakten:
     build: vakten/vaktpj/
-    command: >
-      gunicorn vaktapp.wsgi:application --bind 0.0.0.0:8080 --workers=4 --threads=4
     env_file:
       - project.env
     ports:

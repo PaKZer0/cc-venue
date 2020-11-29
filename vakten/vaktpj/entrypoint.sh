@@ -16,4 +16,10 @@ python manage.py makemigrations main --noinput
 python manage.py migrate --noinput 
 python manage.py collectstatic --noinput
 
-exec "$@"
+if [[  ${SERVER_TYPE} = "dev" ]]; then
+    echo "Running django development server"
+    exec /code/manage.py runserver 0:8080
+else
+    echo "Running gunicorn production server"
+    exec gunicorn vaktapp.wsgi:application --bind 0.0.0.0:8080 --workers=4 --threads=4
+fi
