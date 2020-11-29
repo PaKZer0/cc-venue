@@ -5,7 +5,7 @@ services:
     env_file:
       - project.env
     ports:
-      - "8000:8000"# this port should be removed on production enviroment
+      - "8000:8000"
     networks:
       - dev
   
@@ -35,7 +35,7 @@ services:
   vakten:
     build: vakten/vaktpj/
     command: >
-      gunicorn vaktapp.wsgi:application --bind 0.0.0.0:8080 --workers=4
+      gunicorn vaktapp.wsgi:application --bind 0.0.0.0:8080 --workers=4 --threads=4
     env_file:
       - project.env
     ports:
