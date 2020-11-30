@@ -24,7 +24,8 @@ RUN pip install --upgrade pip
 # Install the requirements.
 RUN apk update; apk add netcat-openbsd; \
  apk add --no-cache postgresql-libs && \
- apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+ apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
+ zlib-dev jpeg-dev && \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
  apk --purge del .build-deps
 

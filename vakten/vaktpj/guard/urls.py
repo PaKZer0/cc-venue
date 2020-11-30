@@ -4,5 +4,4 @@ from . import views
 
 urlpatterns = [
 	path('', views.index, name='index'),
-	re_path(r'^icecast/(?P<path>.*)$', views.IcecastProxyView.as_view(), name='icecast'),
 ]
