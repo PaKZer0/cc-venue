@@ -44,7 +44,7 @@ services:
       - db
     volumes:
       - ./vakten/vaktpj:/code
-      - ./staticfiles/:/opt/staticfiles
+      - staticfiles:/opt/staticfiles
   
   nginx:
     #container_name: cc_venue_nginx_1

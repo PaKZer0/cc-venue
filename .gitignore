@@ -1,7 +1,3 @@
-# static folder
-staticfiles/
-
-
 # Python gitignore template
 # Byte-compiled / optimized / DLL files
 __pycache__/
