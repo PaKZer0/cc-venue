@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from keyconfig import Database, Secrets
+from keyconfig import Database, Secrets, AppSettings
 
 import os
 
@@ -26,10 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = Secrets.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
-
+if AppSettings.SERVER_TYPE == 'dev':
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"] # change for global host
 
 # Application definition
 
@@ -41,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_registration',
 ]
+
+if AppSettings.HAS_USER_REGISTRATION:
+    INSTALLED_APPS += ['django_registration']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

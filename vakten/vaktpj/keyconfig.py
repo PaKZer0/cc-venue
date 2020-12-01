@@ -11,3 +11,9 @@ class Database:
 
 class Secrets:
     SECRET_KEY = "ChangeThisKey"
+
+
+class AppSettings:
+    SERVER_TYPE = os.getenv('SERVER_TYPE', 'dev')
+    HAS_USER_REGISTRATION = os.getenv('HAS_USER_REGISTRATION', False)
+    HAS_AD_ENGINE = os.getenv('HAS_AD_ENGINE', False)
