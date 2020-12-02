@@ -1,6 +1,7 @@
-version: "3.8"
+version: "3"
 services:
   icecast:
+    container_name: cc-venue_icecast_1
     image: moul/icecast:latest
     env_file:
       - project.env
@@ -11,6 +12,7 @@ services:
   
   # add https://hub.docker.com/_/eggdrop/ bot?
   irc:
+    container_name: cc-venue_irc_1
     image: inspircd/inspircd-docker:latest
     env_file:
       - project.env
@@ -22,7 +24,7 @@ services:
     networks:
       - dev
   db:
-    #container_name: cc_venue_db_1
+    container_name: cc-venue_db_1
     image: postgres:latest
     restart: always
     env_file:
@@ -33,6 +35,7 @@ services:
       - dev
   
   vakten:
+    container_name: cc-venue_vakten_1
     build: vakten/vaktpj/
     env_file:
       - project.env
@@ -47,7 +50,7 @@ services:
       - staticfiles:/opt/staticfiles
   
   nginx:
-    #container_name: cc_venue_nginx_1
+    container_name: cc-venue_nginx_1
     image: nginx:mainline-alpine
     restart: always
     ports:
