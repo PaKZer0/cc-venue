@@ -26,7 +26,6 @@ services:
   db:
     container_name: cc-venue_db_1
     image: postgres:latest
-    restart: always
     env_file:
       - project.env
     volumes:
@@ -52,7 +51,6 @@ services:
   nginx:
     container_name: cc-venue_nginx_1
     image: nginx:mainline-alpine
-    restart: always
     ports:
       - 1337:80
     volumes:
