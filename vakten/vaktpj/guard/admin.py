@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__author__ = 'ffuentes'
+
 from django.contrib import admin
 from .models import Stream, TokenType, Token
 

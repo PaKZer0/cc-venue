@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__author__ = 'ffuentes'
+
 from django.http import HttpResponse
 from django.shortcuts import render
 

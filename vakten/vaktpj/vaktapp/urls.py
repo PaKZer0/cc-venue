@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__author__ = 'ffuentes'
+
 """vaktapp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
