@@ -60,6 +60,25 @@ services:
       - dev
     depends_on:
       - vakten
+  
+  jamulus:
+    container_name: cc-venue_jamulus_1
+    image: pakzer0/jamulus:alpine
+    build: Jamulus/
+    ports:
+      - "22124:22124/udp"
+    env_file:
+      - project.env
+    entrypoint:
+      - "Jamulus"
+      - "--server"
+      - "--nogui"
+      - "--welcomemessage"
+      - "Welcome to the Jamulus rehearsal room"
+      - "--numchannels"
+      - "16"
+      - "-d"
+      - "-T"
 
 networks:
   dev:
