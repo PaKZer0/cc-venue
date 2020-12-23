@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
 ]
 
 if AppSettings.HAS_USER_REGISTRATION:
@@ -138,3 +139,5 @@ STATIC_ROOT = os.path.join('/opt', "staticfiles")
 
 # Registration plugin
 ACCOUNT_ACTIVATION_DAYS = os.getenv('REGISTER_ACCOUNT_ACTIVATION_DAYS', 2) # two days only
+
+LOGIN_REDIRECT_URL='/'
