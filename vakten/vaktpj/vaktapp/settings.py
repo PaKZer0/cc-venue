@@ -144,3 +144,4 @@ STATIC_ROOT = os.path.join('/opt', "staticfiles")
 ACCOUNT_ACTIVATION_DAYS = os.getenv('REGISTER_ACCOUNT_ACTIVATION_DAYS', 2) # two days only
 
 LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='/'
