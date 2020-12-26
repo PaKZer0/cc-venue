@@ -23,6 +23,7 @@ services:
       - "7001:7001"
     networks:
       - dev
+  
   db:
     container_name: cc-venue_db_1
     image: postgres:latest
@@ -32,6 +33,12 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - dev
+  
+  irc-builder:
+    container_name: cc-venue_ircbuilder_1
+    build: ircclient_builder
+    volumes:
+      - ./vakten/vaktpj/guard/static/ircclient/:/bundle/
   
   vakten:
     container_name: cc-venue_vakten_1
@@ -44,6 +51,7 @@ services:
       - dev
     depends_on:
       - db
+      - irc-builder
     volumes:
       - ./vakten/vaktpj:/code
       - staticfiles:/opt/staticfiles
