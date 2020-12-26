@@ -12,7 +12,7 @@ services:
   
   # add https://hub.docker.com/_/eggdrop/ bot?
   irc:
-    container_name: cc-venue_irc_1
+    #container_name: cc-venue_irc_1
     image: inspircd/inspircd-docker:latest
     env_file:
       - project.env
@@ -39,6 +39,15 @@ services:
     build: ircclient_builder
     volumes:
       - ./vakten/vaktpj/guard/static/ircclient/:/bundle/
+      - ./ircclient_builder/config.json:/config.json
+  
+  webircgateway:
+    container_name: cc-venue_webircgateway_1
+    build: webircgateway
+    ports:
+      - 8888:80
+    networks:
+      - dev
   
   vakten:
     container_name: cc-venue_vakten_1
@@ -52,6 +61,7 @@ services:
     depends_on:
       - db
       - irc-builder
+      - webircgateway
     volumes:
       - ./vakten/vaktpj:/code
       - staticfiles:/opt/staticfiles
