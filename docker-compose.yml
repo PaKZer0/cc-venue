@@ -12,15 +12,14 @@ services:
   
   # add https://hub.docker.com/_/eggdrop/ bot?
   irc:
-    #container_name: cc-venue_irc_1
     image: inspircd/inspircd-docker:latest
     env_file:
       - project.env
-    ports:
-      - "6667:6667"
-      - "6697:6697"
-      - "7000:7000"
-      - "7001:7001"
+    expose:
+      - 6667
+      - 6697
+      - 7000
+      - 7001
     networks:
       - dev
   
